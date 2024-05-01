@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="EV_Population_DM" id="LogicalDesign-17aa" database="LogicalDesign" >
+	<schema name="INSTANCE" catalogname="EV_Population_DM" >
+		<table name="Fact Table" prior="Fact_Table" >
+			<column name="Fact Table ID" prior="Fact_Table_ID" type="INT" jt="4" mandatory="y" />
+			<column name="Vehicle ID" type="INT" jt="4" mandatory="y" />
+			<column name="Location_ID" type="INT" jt="4" mandatory="y" />
+			<column name="Legislation ID" type="INT" jt="4" mandatory="y" />
+			<column name="Geographic Dimension ID" type="INT" jt="4" mandatory="y" />
+			<column name="Utility ID" type="INT" jt="4" mandatory="y" />
+			<column name="VIN" type="VARCHAR" length="10" jt="12" />
+			<column name="Model Year" type="VARCHAR" jt="12" />
+			<column name="Make" type="VARCHAR" length="50" jt="12" />
+			<column name="Model" type="VARCHAR" length="50" jt="12" />
+			<column name="Electric Vehicle Type" type="VARCHAR" length="100" jt="12" />
+			<column name="CAFV Eligibility" type="VARCHAR" length="50" jt="12" />
+			<column name="County" type="VARCHAR" length="50" jt="12" />
+			<column name="City" type="VARCHAR" length="50" jt="12" />
+			<column name="State" type="CHAR" length="2" jt="1" />
+			<column name="Postal Code" type="VARCHAR" length="10" jt="12" />
+			<column name="Electric Utility" type="VARCHAR" length="100" jt="12" />
+			<column name="Legislative District" type="VARCHAR" length="50" jt="12" />
+			<column name="Vehicle Location" type="VARCHAR" length="255" jt="12" />
+			<column name="2020 Census Tract" type="VARCHAR" length="20" jt="12" />
+			<index name="pk_Fact_Table" unique="PRIMARY_KEY" >
+				<column name="Fact Table ID" />
+				<column name="Vehicle ID" />
+				<column name="Location_ID" />
+				<column name="Legislation ID" />
+				<column name="Geographic Dimension ID" />
+				<column name="Utility ID" />
+			</index>
+			<fk name="fk_Fact Table_Vehicle" virtual="y" to_schema="EV_Population_DM.INSTANCE" to_table="Vehicle" type="Identifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
+				<fk_column name="Vehicle ID" pk="Vehicle ID" />
+			</fk>
+			<fk name="fk_Fact Table_Location" virtual="y" to_schema="EV_Population_DM.INSTANCE" to_table="Location" type="Identifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
+				<fk_column name="Location_ID" pk="Location_ID" />
+			</fk>
+			<fk name="fk_Fact Table_Legislation" virtual="y" to_schema="EV_Population_DM.INSTANCE" to_table="Legislation" type="Identifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
+				<fk_column name="Legislation ID" pk="Legislation ID" />
+			</fk>
+			<fk name="fk_Fact Table_Geographic Dimension" virtual="y" to_schema="EV_Population_DM.INSTANCE" to_table="Geographic Dimension" type="Identifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
+				<fk_column name="Geographic Dimension ID" pk="Geographic Dimension ID" />
+			</fk>
+			<fk name="fk_Fact Table_Utility" virtual="y" to_schema="EV_Population_DM.INSTANCE" to_table="Utility" type="Identifying" mandatory="y" cardinality="ZeroMore" range_from="0" range_to="0" >
+				<fk_column name="Utility ID" pk="Utility ID" />
+			</fk>
+		</table>
+		<table name="Geographic Dimension" prior="Entity" >
+			<column name="Geographic Dimension ID" type="INT" jt="4" mandatory="y" />
+			<column name="Vehicle Location" type="VARCHAR" length="255" jt="12" />
+			<column name="2020 Census Tract" type="VARCHAR" length="20" jt="12" />
+			<index name="pk_Geographic Dimension" unique="PRIMARY_KEY" >
+				<column name="Geographic Dimension ID" />
+			</index>
+		</table>
+		<table name="Legislation" prior="Entity" >
+			<column name="Legislation ID" type="INT" jt="4" mandatory="y" />
+			<column name="Legislative District" type="VARCHAR" length="50" jt="12" />
+			<index name="pk_Legislation" unique="PRIMARY_KEY" >
+				<column name="Legislation ID" />
+			</index>
+		</table>
+		<table name="Location" prior="Entity" >
+			<column name="Location_ID" type="INT" jt="4" mandatory="y" />
+			<column name="County" type="VARCHAR" length="50" jt="12" />
+			<column name="City" type="VARCHAR" length="50" jt="12" />
+			<column name="State" type="CHAR" length="2" jt="1" />
+			<column name="Postal Code" type="VARCHAR" length="10" jt="12" />
+			<index name="pk_Location" unique="PRIMARY_KEY" >
+				<column name="Location_ID" />
+			</index>
+		</table>
+		<table name="Utility" prior="Entity" >
+			<column name="Utility ID" type="INT" jt="4" mandatory="y" />
+			<column name="Electric Utility" type="VARCHAR" length="100" jt="12" />
+			<index name="pk_Utility" unique="PRIMARY_KEY" >
+				<column name="Utility ID" />
+			</index>
+		</table>
+		<table name="Vehicle" prior="Entity" >
+			<column name="Vehicle ID" type="INT" jt="4" mandatory="y" />
+			<column name="VIN" type="VARCHAR" length="10" jt="12" />
+			<column name="Model Year" type="VARCHAR" jt="12" />
+			<column name="Make" type="VARCHAR" length="50" jt="12" />
+			<column name="Model" type="VARCHAR" length="50" jt="12" />
+			<column name="Electric Vehicle Type" type="VARCHAR" length="100" jt="12" />
+			<column name="CAFV Eligibility" type="VARCHAR" length="50" jt="12" />
+			<index name="pk_Vehicle" unique="PRIMARY_KEY" >
+				<column name="Vehicle ID" />
+			</index>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-13db" show_relation="columns" >
+		<entity schema="EV_Population_DM.INSTANCE" name="Fact Table" color="C1D8EE" x="640" y="176" />
+		<entity schema="EV_Population_DM.INSTANCE" name="Geographic Dimension" color="C1D8EE" x="1152" y="320" />
+		<entity schema="EV_Population_DM.INSTANCE" name="Legislation" color="C1D8EE" x="1104" y="144" />
+		<entity schema="EV_Population_DM.INSTANCE" name="Location" color="C1D8EE" x="352" y="464" />
+		<entity schema="EV_Population_DM.INSTANCE" name="Utility" color="C1D8EE" x="688" y="608" />
+		<entity schema="EV_Population_DM.INSTANCE" name="Vehicle" color="C1D8EE" x="224" y="160" />
+		<callout x="48" y="48" pointer="Round" >
+			<comment><![CDATA[This is a layout - a diagram with tools.
+- Create new entities by right-clicking the layout. 
+- Double-click entity headers to edit.
+- For a better understanding of the schema, create multiple layouts.
+- Deploy the model into the database by converting it first to the physical design.]]></comment>
+		</callout>
+	</layout>
+</project>
